@@ -1,0 +1,110 @@
+2024-08-01 13:18:31,255 INFO: Application de paiement démarrée [in /app/main.py:28]
+2024-08-01 13:18:46,714 INFO: Début de la notification CSMS - Type d'événement : charge_failed [in /app/main.py:96]
+2024-08-01 13:18:46,739 ERROR: Erreur de connexion au CSMS : Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)] [in /app/main.py:118]
+2024-08-01 13:18:46,739 ERROR: Détails de l'erreur de connexion : [in /app/main.py:119]
+Traceback (most recent call last):
+  File "/app/main.py", line 299, in end_charging_session
+    payment_intent = stripe.PaymentIntent.create(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/stripe/_payment_intent.py", line 9689, in create
+    cls._static_request(
+  File "/usr/local/lib/python3.11/site-packages/stripe/_api_resource.py", line 177, in _static_request
+    return _APIRequestor._global_instance().request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/stripe/_api_requestor.py", line 196, in request
+    resp = requestor._interpret_response(rbody, rcode, rheaders)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/stripe/_api_requestor.py", line 732, in _interpret_response
+    self.handle_error_response(rbody, rcode, resp.data, rheaders)
+  File "/usr/local/lib/python3.11/site-packages/stripe/_api_requestor.py", line 321, in handle_error_response
+    raise err
+stripe._error.InvalidRequestError: Request req_gQmU4mX8KQnaJV: You cannot confirm this PaymentIntent because it's missing a payment method. You can either update the PaymentIntent with a payment method and then confirm it again, or confirm it again directly with a payment method or ConfirmationToken.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1036, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 104, in start_connection
+    raise all_exceptions[0]
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 82, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 159, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "uvloop/loop.pyx", line 1106, in uvloop.loop.Loop._sock_connect_cb
+ConnectionRefusedError: [Errno 111] Connect call failed ('127.0.0.1', 8000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/main.py", line 106, in notify_csms
+    async with session.post(csms_url, json={
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 1344, in __aenter__
+    self._resp = await self._coro
+                 ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 648, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 546, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 954, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1313, in _create_direct_connection
+    raise last_exc
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1282, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1051, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)]
+2024-08-01 13:18:46,759 INFO: Fin de la tentative de notification CSMS - Type d'événement : charge_failed [in /app/main.py:124]
+2024-08-01 13:20:56,102 INFO: Application de paiement démarrée [in /app/main.py:28]
+2024-08-01 13:23:16,123 INFO: Application de paiement démarrée [in /app/main.py:28]
+2024-08-01 13:23:26,067 INFO: Début de la notification CSMS - Type d'événement : charge_completed [in /app/main.py:96]
+2024-08-01 13:23:26,077 ERROR: Erreur de connexion au CSMS : Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)] [in /app/main.py:118]
+2024-08-01 13:23:26,078 ERROR: Détails de l'erreur de connexion : [in /app/main.py:119]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1036, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 104, in start_connection
+    raise all_exceptions[0]
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 82, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohappyeyeballs/impl.py", line 159, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "uvloop/loop.pyx", line 2615, in sock_connect
+  File "uvloop/loop.pyx", line 1106, in uvloop.loop.Loop._sock_connect_cb
+ConnectionRefusedError: [Errno 111] Connect call failed ('127.0.0.1', 8000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/main.py", line 106, in notify_csms
+    async with session.post(csms_url, json={
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 1344, in __aenter__
+    self._resp = await self._coro
+                 ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 648, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 546, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 954, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1313, in _create_direct_connection
+    raise last_exc
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1282, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/connector.py", line 1051, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host localhost:8000 ssl:default [Connect call failed ('127.0.0.1', 8000)]
+2024-08-01 13:23:26,084 INFO: Fin de la tentative de notification CSMS - Type d'événement : charge_completed [in /app/main.py:124]

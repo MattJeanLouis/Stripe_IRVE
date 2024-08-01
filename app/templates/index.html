@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement de Recharge - IRVE</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Paiement de Recharge IRVE</h1>
+        <div class="mb-6 text-center">
+            <p class="text-gray-600">Choisissez votre méthode de paiement :</p>
+        </div>
+        <div class="space-y-4">
+            <button onclick="selectOption('estimated')" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                Paiement estimé par le système
+            </button>
+            <button onclick="selectOption('fixed')" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                Entrer un montant fixe
+            </button>
+            <button onclick="selectOption('dynamic')" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                Paiement selon la charge réelle
+            </button>
+        </div>
+        <form id="paymentForm" action="/api/create-payment" method="POST" class="mt-6 hidden">
+            <div id="fixedAmountInput" class="mb-4 hidden">
+                <label for="montant" class="block text-sm font-medium text-gray-700">Montant (en euros)</label>
+                <input type="number" id="montant" name="montant" min="0.50" step="0.01" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+            <input type="hidden" id="paymentType" name="paymentType" value="">
+            <input type="hidden" name="devise" value="eur">
+            <input type="hidden" name="id_client" value="client_123456">
+            <input type="hidden" name="description" value="Recharge de véhicule électrique">
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
+                Procéder au paiement
+            </button>
+        </form>
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>Paiement sécurisé par Stripe</p>
+            <p>© 2023 IRVE. Tous droits réservés.</p>
+        </div>
+    </div>
+    <script>
+        function selectOption(option) {
+            document.getElementById('paymentType').value = option;
+            document.getElementById('paymentForm').classList.remove('hidden');
+            if (option === 'fixed') {
+                document.getElementById('fixedAmountInput').classList.remove('hidden');
+            } else {
+                document.getElementById('fixedAmountInput').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
