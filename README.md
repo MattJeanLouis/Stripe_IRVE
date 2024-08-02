@@ -33,6 +33,25 @@ Les principaux objectifs du projet sont :
     - Jinja2 : Comme moteur de template pour générer du HTML dynamiquement.
     - aiohttp : Une bibliothèque HTTP asynchrone pour Python, utilisée pour les requêtes HTTP asynchrones.
 
+Voici quelques captures d'écran pour illustrer le fonctionnement de l'application :
+
+## Page d'accueil
+
+![Page d'accueil](./captures/index.png)
+
+## Page de succès
+
+![Page de succès](./captures/succes.png)
+![Page de succès](./captures/succes2.png)
+
+## Page de chargement
+
+![Page de chargement](./captures/charge_en_cours.png)
+
+## log des tests
+
+![Log des tests](./captures/log_tests.png)
+
 # 2. Architecture du Projet
 
 ## Structure des fichiers
